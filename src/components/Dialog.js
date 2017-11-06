@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 
 export default class Dialog extends Component {
   state = {
-      visible: true,
       visibility: this.props.visibility
   };
 
   render() {
-    const { visible } = this.state;
-    const { visibility, goals } = this.props;
+    const { visibility, goals, dialog, onCancel } = this.props;
     const fields = [
       {
         id: "shows",
@@ -32,7 +30,7 @@ export default class Dialog extends Component {
       },
     ];
 
-    return(visible || null) && <div className="modal-dialog dialog">
+    return(dialog || null) && <div className="modal-dialog modal-sm dialog">
       <div className="modal-content">
         <div className="modal-body">
           <ul className="dialog dialog__list">
@@ -51,7 +49,7 @@ export default class Dialog extends Component {
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-primary">OK</button>
-          <button type="button" className="btn btn-default" onClick={() => this.setState({ visible: false })}>Отменить</button>
+          <button type="button" className="btn btn-default" onClick={() => onCancel() }>Отменить</button>
         </div>
       </div>
     </div>

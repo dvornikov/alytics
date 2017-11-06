@@ -1,6 +1,7 @@
 export const RECEIVE_CAMPAIGNS = "RECEIVE_CAMPAIGNS"
 export const RECEIVE_GOALS = "RECEIVE_GOALS"
 export const RECEIVE_VISIBILITY = "RECEIVE_VISIBILITY"
+export const TOGGLE_DIALOG = "TOGGLE_DIALOG"
 
 function receiveCampaigns(payload) {
   return {
@@ -13,6 +14,12 @@ function receiveGoals(payload) {
   return {
     type: RECEIVE_GOALS,
     payload
+  }
+}
+
+export function toggleDialog() {
+  return {
+    type: TOGGLE_DIALOG
   }
 }
 

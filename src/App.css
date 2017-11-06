@@ -15,6 +15,8 @@ body {
   font-weight: normal;
   vertical-align: middle;
   text-align: center;
+
+  cursor: pointer;
 }
 
 .table > tbody > tr > td {
@@ -44,11 +46,18 @@ body {
 }
 
 .modal-content {
+  border: 6px solid #646464;
+  box-shadow: none;
+}
+
+.modal-content {
   background: #fafafa;
 }
 
 .modal-footer {
   text-align: center;
+  border-top: none;
+  padding-top: 0;
 }
 
 .btn {
@@ -67,6 +76,7 @@ body {
 }
 
 .dialog__list {
+  margin: 0;
   padding: 0;
   list-style: none;
 }

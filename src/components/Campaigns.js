@@ -3,10 +3,10 @@ function isVisible(visibility, section, id) {
   return true;
 }
 
-export default ({ campaigns, goals, visibility }) => (
+export default ({ campaigns, goals, visibility, onHeadClick }) => (
   <table className="table table-bordered table-hover table-striped">
       <thead>
-        <tr>
+        <tr onClick={() => onHeadClick()}>
           <th rowSpan="2">КАМПАНИИ</th>
           <th rowSpan="2">Статус</th>
           {isVisible(visibility, 'content-stat', 'shows') && <th rowSpan="2">Показы</th>}
@@ -18,7 +18,7 @@ export default ({ campaigns, goals, visibility }) => (
             goals.map(goal => isVisible(visibility, `goal-${goal.goal_id}`) && <th colSpan="3">{goal.name}</th>)
           }
         </tr>
-        <tr>
+        <tr onClick={() => onHeadClick()}>
           {
             goals.map(goal => {
               let t = [];
