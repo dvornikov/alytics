@@ -8,11 +8,13 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
 import reducer from './reducers';
 import {
-    fetchData
+  fetchVisibility,
+  fetchData
 } from './actions';
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
+store.dispatch(fetchVisibility());
 store.dispatch(fetchData());
 
 ReactDOM.render(

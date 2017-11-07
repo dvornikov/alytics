@@ -1,7 +1,9 @@
 export const RECEIVE_CAMPAIGNS = "RECEIVE_CAMPAIGNS"
 export const RECEIVE_GOALS = "RECEIVE_GOALS"
-export const RECEIVE_VISIBILITY = "RECEIVE_VISIBILITY"
 export const TOGGLE_DIALOG = "TOGGLE_DIALOG"
+export const RECEIVE_VISIBILITY = "RECEIVE_VISIBILITY"
+export const VISIBILITY_UPDATE = "VISIBILITY_UPDATE"
+export const VISIBILITY_UPDATE_SUCCESS = "VISIBILITY_UPDATE_SUCCESS"
 
 function receiveCampaigns(payload) {
   return {
@@ -23,9 +25,57 @@ export function toggleDialog() {
   }
 }
 
+function receiveVisibility(payload) {
+  return {
+    type: RECEIVE_VISIBILITY,
+    payload
+  }
+}
+
+function visibilityUpdateSuccess() {
+  return {
+    type: VISIBILITY_UPDATE_SUCCESS
+  }
+}
+
+export function updateVisibility(visibility) {
+  return {
+    type: VISIBILITY_UPDATE,
+    payload: visibility
+  }
+}
+
+export function syncVisibility(visibility) {
+  return dispatch => {
+    dispatch(updateVisibility(visibility))
+    return fetch('/visibility', {
+        method: 'put',
+        body: JSON.stringify(visibility),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(json => {
+        dispatch(toggleDialog())
+        dispatch(visibilityUpdateSuccess())
+      })
+  }
+}
+
+export function fetchVisibility() {
+  return dispatch => {
+    return fetch('/visibility')
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveVisibility(json))
+      })
+  }
+}
+
 export function fetchData() {
   return dispatch => {
-    return fetch('https://gist.githubusercontent.com/mvikharev/b38a14aa90ef5bee205166526629defd/raw/d43b44bb6aae4a784aaa73acda28b29c99b6cf9e/table-data.json')
+    return fetch('/campaigns')
       .then(response => response.json())
       .then(json => {
         dispatch(receiveGoals(json.goals_list))

@@ -6,7 +6,7 @@ const mapStateToProps = ({ campaigns, goals, visibility }) => {
   return {
     campaigns,
     goals,
-    visibility
+    visibility: visibility.data
   }
 }
 
